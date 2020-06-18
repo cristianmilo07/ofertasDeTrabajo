@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="//www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>EmpleosApp | Aplicación para publicar Ofertas de Trabajo.</title>
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body>
+
+<header th:insert="fragments/menu :: menu-principal">
+
+</header>
+
+<main role="main">
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h3>Encuentra el trabajo que andas buscando.</h3>
+            Puedes buscar por descripción y categoría.
+            <form class="form-inline">
+                <input type="text" class="form-control mb-3" id="exampleFormControlInput1" placeholder="Escriba una búsqueda">&nbsp;
+                <select class="custom-select custom-select mb-3">
+                    <option selected>Seleccione una categoría</option>
+                    <option value="1">Ventas</option>
+                    <option value="2">Contabilidad</option>
+                    <option value="3">Transporte</option>
+                    <option value="4">Informática</option>
+                    <option value="5">Construcción</option>
+                </select>&nbsp;
+                <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+            </form>
+        </div>
+    </div>
+    <hr>
+
+    <div class="container">
+        <h2 class="font-weight-bold text-center text-capitalize">DESTACADOS</h2>
+        <hr>
+        <div class="row" th:each="vacante : ${vacantes}">
+            <div class="col-md-3">
+                <img class="rounded mx-auto d-block" src="images/logo1.png" alt="Generic placeholder image" width="220" height="220">
+            </div>
+            <div class="col-md-9">
+                <h2 th:text="${vacante.nombre}"></h2>
+                <h6 class="card-title"><strong>Categoría: </strong> <span></span></h6>
+                <h6 class="card-title"><strong>Publicado: </strong> <span th:text="${vacante.fecha}"></span></h6>
+                <p th:text="${vacante.descripcion}"></p>
+                <p><a class="btn btn-secondary" th:href="@{/vacantes/view/{id} (id=${vacante.id})}" role="button">Detalles &raquo;</a></p>
+            </div>
+        </div>
+        <hr>
+    </div> <!-- /container -->
+
+</main>
+
+<footer th:insert="fragments/footer :: pie-pagina" class="footer">
+
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>
