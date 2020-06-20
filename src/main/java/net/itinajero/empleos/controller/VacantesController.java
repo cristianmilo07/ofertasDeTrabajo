@@ -6,11 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/vacantes")
@@ -19,16 +23,31 @@ public class VacantesController {
     @Autowired
     private IVacanteService serviceVacantes;
 
+    @GetMapping("/index")
+    public String mostrarIndex(Model model) {
+        List<Vacante> lista = serviceVacantes.buscarTodas();
+        model.addAttribute("vacantes", lista);
+        return "vacantes/listVacantes";
+    }
+
     @GetMapping("/create")
-    public String crear() {
+    public String crear( Vacante vacante) {
+
         return "vacantes/formVacante";
     }
 
+
     @PostMapping("/save")
-    public String guardar(Vacante vacante){
+    public String guardar(Vacante vacante, BindingResult result, RedirectAttributes attributes){
+        if (result.hasErrors()){
+            for (ObjectError error: result.getAllErrors()){
+                System.out.println("Ocurrio un error " + error.getDefaultMessage());
+            };
+        }
         serviceVacantes.guardar(vacante);
+        attributes.addFlashAttribute("msg", "Registro Guardado");
         System.out.println("Vacante: " + vacante );
-        return "vacantes/listVacantes";
+        return "redirect:/vacantes/index";
     }
 
     @GetMapping("/delete")
