@@ -1,9 +1,14 @@
 package net.itinajero.empleos.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name="Vacantes")
 public class Vacante {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nombre;
     private String descripcion;
@@ -13,6 +18,9 @@ public class Vacante {
     private String imagen="no-image.png";
     private String estatus;
     private String detalles;
+    @OneToOne
+    @JoinColumn(name="idCategoria")
+    private Categoria categoria;
 
     public Integer getId() {
         return id;
@@ -86,6 +94,14 @@ public class Vacante {
         this.detalles = detalles;
     }
 
+    public net.itinajero.empleos.model.Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(net.itinajero.empleos.model.Categoria categoria) {
+        this.categoria = categoria;
+    }
+
     @Override
     public String toString() {
         return "Vacante{" +
@@ -98,6 +114,7 @@ public class Vacante {
                 ", imagen='" + imagen + '\'' +
                 ", estatus='" + estatus + '\'' +
                 ", detalles='" + detalles + '\'' +
+                ", categoria=" + categoria +
                 '}';
     }
 }

@@ -1,6 +1,7 @@
 package net.itinajero.empleos.controller;
 
 import net.itinajero.empleos.model.Vacante;
+import net.itinajero.empleos.service.ICategoriasService;
 import net.itinajero.empleos.service.IVacanteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -23,6 +24,9 @@ public class VacantesController {
     @Autowired
     private IVacanteService serviceVacantes;
 
+    @Autowired
+    private ICategoriasService serviceCategorias;
+
     @GetMapping("/index")
     public String mostrarIndex(Model model) {
         List<Vacante> lista = serviceVacantes.buscarTodas();
@@ -31,7 +35,8 @@ public class VacantesController {
     }
 
     @GetMapping("/create")
-    public String crear( Vacante vacante) {
+    public String crear( Vacante vacante, Model model) {
+        model.addAttribute("categorias", serviceCategorias.buscarTodas());
 
         return "vacantes/formVacante";
     }

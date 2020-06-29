@@ -1,6 +1,7 @@
 package net.itinajero.empleos.service;
 
 import net.itinajero.empleos.model.Vacante;
+
 import java.util.List;
 
 public interface IVacanteService {
