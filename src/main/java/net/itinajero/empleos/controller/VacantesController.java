@@ -4,6 +4,7 @@ import net.itinajero.empleos.model.Vacante;
 import net.itinajero.empleos.service.ICategoriasService;
 import net.itinajero.empleos.service.IVacanteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,7 @@ public class VacantesController {
     private IVacanteService serviceVacantes;
 
     @Autowired
+    @Qualifier("categoriaServiceJpa")
     private ICategoriasService serviceCategorias;
 
     @GetMapping("/index")

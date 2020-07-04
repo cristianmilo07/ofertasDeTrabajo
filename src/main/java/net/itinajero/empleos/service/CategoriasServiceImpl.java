@@ -1,12 +1,14 @@
 package net.itinajero.empleos.service;
 
 import net.itinajero.empleos.model.Categoria;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
 
 @Service
+//@Primary
 public class CategoriasServiceImpl implements ICategoriasService{
 
     private List<Categoria> lista = null;
